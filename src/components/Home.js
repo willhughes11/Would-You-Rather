@@ -32,7 +32,7 @@ class Home extends Component {
                         {this.props.unansweredQuestionIds.length === 0 &&
                         <ul className='home-list'>
                             <li>
-                                You have answered all questions.
+                                All Questions Answered!
                             </li>
                         </ul>
                         }
@@ -49,7 +49,9 @@ class Home extends Component {
                         }
                         {this.props.answeredQuestionIds.length === 0 &&
                         <ul className='home-list'>
-                            <li>You don't have any questions answered.</li>
+                            <li>
+                                No Questions Answered!
+                            </li>
                         </ul>
                         }
                     </TabPanel>

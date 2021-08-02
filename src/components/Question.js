@@ -10,7 +10,7 @@ class Question extends Component {
         const { question } = this.props
 
         if (!question) {
-            return <p>This question doesn't exist</p>
+            return <p>Question Not Found!</p>
         } else {
             
             const { id, author, optionOne, optionTwo } = question

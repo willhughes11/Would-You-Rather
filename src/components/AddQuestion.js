@@ -53,16 +53,13 @@ class AddQuestion extends Component {
                         <TextBox 
                             placeholder="This?" 
                             value={textOne} 
-                            onChange={this.handleTextOneChange} 
-                            className="input" 
-                            maxLength={280}>
+                            onChange={this.handleTextOneChange}>
                         </TextBox>
                         <div className="center margin">OR</div>
                         <TextBox 
                             placeholder="That?" 
                             value={textTwo} 
-                            onChange={this.handleTextTwoChange} 
-                            className="input" maxLength={280}>
+                            onChange={this.handleTextTwoChange}>
                         </TextBox>
                         <button
                             className='btn'
@@ -77,13 +74,13 @@ class AddQuestion extends Component {
     }
 }
 
-const TextBox = ({placeholder,value,onChange,className,maxLength}) =>(
+const TextBox = ({placeholder,value,onChange}) =>(
         <input
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={className}
-        maxLength={maxLength}
+        className="input"
+        maxLength={280}
         >
         </input>
     )
