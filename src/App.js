@@ -6,7 +6,6 @@ import AddQuestion from './components/AddQuestion'
 import Leaderboard from './components/Leaderboard'
 import Questions from './components/Questions'
 import Login from './components/Login'
-import LoadingBar from 'react-redux-loading'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Nav from './components/Nav'
 import PrivateRoute from './components/PrivateRoute'
@@ -25,7 +24,6 @@ class App extends Component {
         return (
             <Router>
                 <Fragment>
-                    <LoadingBar />
                     <div className='container'>
                         <Nav></Nav>
                         <div>

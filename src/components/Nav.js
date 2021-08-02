@@ -28,29 +28,29 @@ class Nav extends Component {
                     <ul>
                         <li>
                             <NavLink to='/' exact>
-                                Home
+                                HOME
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to='/add'>
-                                New Question
+                                ADD QUESTION
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to='/leaderboard'>
-                                Leaderboard
+                                LEADERBOARD
                             </NavLink>
                         </li>
                         {this.props.loggedIn &&
                         <li>
                             <a style={{cursor:'pointer'}} onClick={this.logout}>
-                                Logout
+                                LOGOUT
                             </a>
                         </li>
                         }
                         <li>
                             {this.props.loggedIn &&
-                                <div className='welcome'>Welcome {this.props.authUser}</div>
+                                <div className='welcome'>WELCOME {this.props.authUser.toString().toUpperCase()}</div>
                             }
                         </li>
                     </ul>
@@ -59,7 +59,5 @@ class Nav extends Component {
         )
     }
 }
-
-
 
 export default connect(navMapStateToProps)(Nav)

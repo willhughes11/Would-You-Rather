@@ -1,5 +1,3 @@
-import { showLoading, hideLoading } from 'react-redux-loading'
-
 export const RECEIVE_AUTH_USER = 'RECEIVE_AUTH_USER'
 
 export function receiveAuthUser(user) {
@@ -11,9 +9,7 @@ export function receiveAuthUser(user) {
 }
 
 export function handleSetAuthUser(user) {
-    return (dispatch, getState) => {
-        dispatch(showLoading())
+    return (dispatch) => {
         dispatch(receiveAuthUser(user))
-        dispatch(hideLoading())
     }
 }

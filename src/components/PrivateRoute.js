@@ -13,24 +13,18 @@ class PrivateRoute extends Component {
                     <Component {...rest} {...props} />
                 )} />
             )
-        } else if (localStorage.getItem('authUser') !== null) {
+        } else if (localStorage.getItem('authUser')) {
             localStorage.removeItem('authUser');
             return (
                 <Route path={path} {...rest} render={props => (
-                    <Redirect to={{
-                            pathname: '/not-found',
-                            state: { from: props.location }
-                        }} />
+                    <Redirect to={{ pathname: '/not-found', state: { from: props.location } }} />
                 )} />
             )
         } else {
             localStorage.removeItem('authUser');
             return (
                 <Route path={path} {...rest} render={props => (
-                    <Redirect to={{
-                        pathname: '/login',
-                        state: { from: props.location }
-                    }} />
+                    <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
                 )} />
             )
         }

@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import { handleAnswerQuestion } from '../actions/questions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { questionsMapStateToProps } from './MapStateToProps';
 
 class Questions extends Component {
@@ -59,32 +57,20 @@ class Questions extends Component {
                     <div className='question-info'>
                         {this.state.answered &&
                             <div>
-                                <span>{author} asks</span>
+                                <span>{author.toString().toUpperCase()} Asks</span>
                                 <div> Questions </div>
                                 <div style={{margin: '10px', padding: '10px'}}>
-                                    <div>{optionOne.text}  {question.optionOne.votes.indexOf(this.props.authUser) !== -1 &&
-                                            <FontAwesomeIcon icon={faCheckCircle} color='green' />
-                                    } </div>
+                                    <div> {optionOne.text} </div>
                                     <div>
-                                        Total Number of Votes: {question.optionOne.votes.length}
+                                        Total Votes: {question.optionOne.votes.length}
                                     </div>
-                                    <div>
-                                        Vote Percentage: {question.optionOne.votes.length/(question.optionOne.votes.length + question.optionTwo.votes.length) * 100}%
-                                    </div>
-    
                                 </div>
                                 <div> OR </div>
                                 <div style={{margin: '10px', padding: '10px'}}>
-                                    <div>{optionTwo.text} {question.optionTwo.votes.indexOf(this.props.authUser) !== -1 &&
-                                    <FontAwesomeIcon icon={faCheckCircle} color='green'/>
-                                    }</div>
+                                    <div> {optionTwo.text} </div>
                                     <div>
-                                        Total Number Of Votes: {question.optionTwo.votes.length}
+                                        Total Votes: {question.optionTwo.votes.length}
                                     </div>
-                                    <div>
-                                        Vote Percentage: {question.optionTwo.votes.length/(question.optionOne.votes.length + question.optionTwo.votes.length) * 100}%
-                                    </div>
-    
                                 </div>
                             </div>
                         }
@@ -96,7 +82,8 @@ class Questions extends Component {
                                     <input type="radio" value="optionOne"
                                            checked={this.state.selectedOption === 'optionOne'}
                                            onChange={this.handleOptionChange} />
-                                    {optionOne.text}                            </label>
+                                    {optionOne.text}                            
+                                </label>
                             </div>
                             <div className="radio">
                                 <label>

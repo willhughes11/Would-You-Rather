@@ -9,25 +9,24 @@ class Question extends Component {
     render() {
         const { question } = this.props
 
-        if (question === null) {
+        if (!question) {
             return <p>This question doesn't exist</p>
-        }
-
-        const {
-            id, author, optionOne, optionTwo
-        } = question
-
-        return (
-            <Link to={`/question/${id}`} className='question'>
-                <Avatar name={author} />
-                <div className='question-info'>
-                    <div>
-                        <span>{author}</span>
-                        <p>{optionOne.text} OR {optionTwo.text}</p>
+        } else {
+            
+            const { id, author, optionOne, optionTwo } = question
+    
+            return (
+                <Link to={`/question/${id}`} className='question'>
+                    <Avatar name={author} />
+                    <div className='question-info'>
+                        <div>
+                            <span>{author}</span>
+                            <p>{optionOne.text} OR {optionTwo.text}</p>
+                        </div>
                     </div>
-                </div>
-            </Link>
-        )
+                </Link>
+            )
+        }
     }
 }
 

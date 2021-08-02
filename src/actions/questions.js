@@ -1,5 +1,4 @@
 import { saveQuestion, saveQuestionAnswer } from '../utils/api'
-import { showLoading, hideLoading } from 'react-redux-loading'
 import { receiveUsers } from './users'
 
 
@@ -25,7 +24,6 @@ function addQuestion(question) {
 export function handleAddQuestion(text1, text2) {
     return (dispatch, getState) => {
         const { authUser } = getState()
-        dispatch(showLoading())
         return saveQuestion ({
             optionOneText: text1,
             optionTwoText: text2,
@@ -33,7 +31,6 @@ export function handleAddQuestion(text1, text2) {
         }).then((res) => {
             dispatch(addQuestion(res.formattedQuestion))
             dispatch(receiveUsers(res.users))
-            dispatch(hideLoading())
         })
     }
 }
