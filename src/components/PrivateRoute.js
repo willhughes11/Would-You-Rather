@@ -17,14 +17,14 @@ class PrivateRoute extends Component {
             localStorage.removeItem('authUser');
             return (
                 <Route path={path} {...rest} render={props => (
-                    <Redirect to={{ pathname: '/not-found', state: { from: props.location } }} />
+                    <Redirect push to={{ pathname: '/not-found', state: { from: props.location } }} />
                 )} />
             )
         } else {
             localStorage.removeItem('authUser');
             return (
                 <Route path={path} {...rest} render={props => (
-                    <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+                    <Redirect push to={{ pathname: '/login', state: { from: props.location } }} />
                 )} />
             )
         }

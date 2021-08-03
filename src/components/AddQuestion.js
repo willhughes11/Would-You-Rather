@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { handleAddQuestion } from '../actions/questions'
+import { handleSaveQuestion } from '../actions/questions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -32,7 +32,7 @@ class AddQuestion extends Component {
         const { textOne, textTwo } = this.state
         const { dispatch } = this.props
 
-        dispatch(handleAddQuestion(textOne, textTwo))
+        dispatch(handleSaveQuestion(textOne, textTwo))
         this.setState(() => ({
             textOne: '',
             textTwo: '',

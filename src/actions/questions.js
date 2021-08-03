@@ -1,62 +1,40 @@
-import { saveQuestion, saveQuestionAnswer } from '../utils/api'
-import { receiveUsers } from './users'
+import { saveQuestion } from '../utils/api';
+import { addQuestionToUser } from '../actions/users';
 
-
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const ANSWER_QUESTION = 'ANSWER_QUESTION';
-
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+export const ADD_ANSWER_TO_QUESTION = 'ADD_ANSWER_TO_QUESTION';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 export function receiveQuestions(questions) {
-    return {
-        type: RECEIVE_QUESTIONS,
-        questions
-    }
+  return {
+    type: RECEIVE_QUESTIONS,
+    questions
+  };
+}
+
+export function addAnswerToQuestion(authUser, qid, answer) {
+  return {
+    type: ADD_ANSWER_TO_QUESTION,
+    authUser,
+    qid,
+    answer
+  };
 }
 
 function addQuestion(question) {
-    return {
-        type: ADD_QUESTION,
-        question
-    }
+  return {
+    type: ADD_QUESTION,
+    question
+  };
 }
 
-export function handleAddQuestion(text1, text2) {
-    return (dispatch, getState) => {
-        const { authUser } = getState()
-        return saveQuestion ({
-            optionOneText: text1,
-            optionTwoText: text2,
-            author: authUser
-        }).then((res) => {
-            dispatch(addQuestion(res.formattedQuestion))
-            dispatch(receiveUsers(res.users))
-        })
-    }
-}
-
-export function answerQuestion(authUser, qid, answer) {
-    return {
-        type: ANSWER_QUESTION,
-        authUser,
-        qid,
-        answer,
-    };
-}
-
-export function handleAnswerQuestion(authUser, qid, answer) {
-    return function(dispatch) {
-        const answerInfo = {
-            authUser,
-            qid,
-            answer,
-        };
-
-        return saveQuestionAnswer(answerInfo)
-            .then(function(res) {
-                dispatch((answerQuestion(authUser, qid, answer)))
-                dispatch(receiveUsers(res.users))
-                dispatch(receiveQuestions(res.questions))
-            })
-    }
+export function handleSaveQuestion(optionOneText, optionTwoText, author) {
+  return dispatch => {
+    return saveQuestion({ optionOneText, optionTwoText, author }).then(
+      question => {
+        dispatch(addQuestion(question));
+        dispatch(addQuestionToUser(question));
+      }
+    );
+  };
 }

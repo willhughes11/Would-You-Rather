@@ -16,7 +16,7 @@ class Question extends Component {
             const { id, author, optionOne, optionTwo } = question
     
             return (
-                <Link to={`/question/${id}`} className='question'>
+                <Link to={`/questions/${id}`} className='question'>
                     <Avatar name={author} />
                     <div className='question-info'>
                         <div>
