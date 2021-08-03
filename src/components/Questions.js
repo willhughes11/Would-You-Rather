@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Avatar from 'react-avatar';
-import { handleAnswerQuestion } from '../actions/questions';
+// import { handleAddQuestion } from '../actions/questions';
 import { questionsMapStateToProps } from './MapStateToProps';
 
 class Questions extends Component {
@@ -28,8 +28,9 @@ class Questions extends Component {
 
     _handleSubmit = (e) => {
         e.preventDefault();
-        const { dispatch } = this.props;
-        dispatch(handleAnswerQuestion(this.props.authUser, this.props.question.id, this.state.selectedOption));
+        // const { dispatch } = this.props;
+        // console.log(this.props.authUser, this.props.question.id, this.state.selectedOption)
+        // dispatch(handleAddQuestion(this.props.authUser, this.props.question.id, this.state.selectedOption));
         this.setState(() => ({
             answered: true
         }));
