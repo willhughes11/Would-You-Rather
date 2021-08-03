@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import {handleSetAuthUser} from "../actions/authUser";
+import {handleSetAuthUser} from '../actions/authUser';
 import {navMapStateToProps} from './MapStateToProps'
 
 
@@ -43,7 +43,7 @@ class Nav extends Component {
                         </li>
                         {this.props.loggedIn &&
                         <li>
-                            <a style={{cursor:'pointer'}} onClick={this.logout}>
+                            <a href="# " style={{cursor:'pointer'}} onClick={this.logout}>
                                 LOGOUT
                             </a>
                         </li>

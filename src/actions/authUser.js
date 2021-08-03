@@ -1,15 +1,14 @@
-export const RECEIVE_AUTH_USER = 'RECEIVE_AUTH_USER'
+export const SET_AUTH_USER = 'SET_AUTH_USER';
 
-export function receiveAuthUser(user) {
-    return {
-        type: RECEIVE_AUTH_USER,
-        user
-    }
-
+export function setAuthUser(id) {
+  return {
+    type: SET_AUTH_USER,
+    id
+  };
 }
 
 export function handleSetAuthUser(user) {
-    return (dispatch) => {
-        dispatch(receiveAuthUser(user))
-    }
+  return (dispatch) => {
+      dispatch(setAuthUser(user))
+  }
 }
