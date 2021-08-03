@@ -115,112 +115,95 @@ let questions = {
     },
 }
 
-let currentUser = null;
-
-export function _getCurrentUser() {
+function generateUID() {
+    return (
+      Math.random()
+        .toString(36)
+        .substring(2, 15) +
+      Math.random()
+        .toString(36)
+        .substring(2, 15)
+    );
+  }
+  
+  export function _getUsers() {
     return new Promise((res, rej) => {
-        setTimeout(() => res(currentUser), 1000);
+      setTimeout(() => res({ ...users }), 1000);
     });
-}
-
-export function _saveUser(user) {
+  }
+  
+  export function _getQuestions() {
     return new Promise((res, rej) => {
-        setTimeout(() => {
-            currentUser = user;
-            res(user);
-        }, 1000);
+      setTimeout(() => res({ ...questions }), 1000);
     });
-}
-
-function generateUID () {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-}
-
-export function _getUsers () {
-    return new Promise((res, rej) => {
-        setTimeout(() => res({...users}), 1000)
-    })
-}
-
-export function _getQuestions () {
-    return new Promise((res, rej) => {
-        setTimeout(() => res({...questions}), 1000)
-    })
-}
-
-export function formatQuestion ({ optionOneText, optionTwoText, author }) {
+  }
+  
+  function formatQuestion({ optionOneText, optionTwoText, author }) {
     return {
-        id: generateUID(),
-        timestamp: Date.now(),
-        author,
-        optionOne: {
-            votes: [],
-            text: optionOneText,
-        },
-        optionTwo: {
-            votes: [],
-            text: optionTwoText,
-        }
-    }
-}
-
-export function _saveQuestion (question) {
+      id: generateUID(),
+      timestamp: Date.now(),
+      author,
+      optionOne: {
+        votes: [],
+        text: optionOneText
+      },
+      optionTwo: {
+        votes: [],
+        text: optionTwoText
+      }
+    };
+  }
+  
+  export function _saveQuestion(question) {
     return new Promise((res, rej) => {
-        const authUser = question.author;
-        const formattedQuestion = formatQuestion(question)
-
-        setTimeout(() => {
-            questions = {
-                ...questions,
-                [formattedQuestion.id]: formattedQuestion
-            }
-
-            users = {
-                ...users,
-                [authUser]: {
-                    ...users[authUser],
-                    questions: users[authUser].questions.concat([formattedQuestion.id])
-                }
-            }
-
-            // res(formattedQuestion, users)
-            res({
-                formattedQuestion: formattedQuestion,
-                users: users
-            })
-        }, 1000)
-    })
-}
-
-export function _saveQuestionAnswer ({ authUser, qid, answer }) {
+      const authUser = question.author;
+      const formattedQuestion = formatQuestion(question);
+  
+      setTimeout(() => {
+        questions = {
+          ...questions,
+          [formattedQuestion.id]: formattedQuestion
+        };
+  
+        users = {
+          ...users,
+          [authUser]: {
+            ...users[authUser],
+            questions: users[authUser].questions.concat([formattedQuestion.id])
+          }
+        };
+  
+        res(formattedQuestion);
+      }, 1000);
+    });
+  }
+  
+  export function _saveQuestionAnswer({ authUser, qid, answer }) {
     return new Promise((res, rej) => {
-        setTimeout(() => {
-            users = {
-                ...users,
-                [authUser]: {
-                    ...users[authUser],
-                    answers: {
-                        ...users[authUser].answers,
-                        [qid]: answer
-                    }
-                }
+      setTimeout(() => {
+        users = {
+          ...users,
+          [authUser]: {
+            ...users[authUser],
+            answers: {
+              ...users[authUser].answers,
+              [qid]: answer
             }
-
-            questions = {
-                ...questions,
-                [qid]: {
-                    ...questions[qid],
-                    [answer]: {
-                        ...questions[qid][answer],
-                        votes: questions[qid][answer].votes.concat([authUser])
-                    }
-                }
+          }
+        };
+  
+        questions = {
+          ...questions,
+          [qid]: {
+            ...questions[qid],
+            [answer]: {
+              ...questions[qid][answer],
+              votes: questions[qid][answer].votes.concat([authUser])
             }
-
-            res({
-                questions,
-                users
-            })
-        }, 500)
-    })
-}
+          }
+        };
+  
+        res();
+      }, 500);
+    });
+  }
