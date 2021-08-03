@@ -20,7 +20,7 @@ class App extends Component {
 
     render() {
         const { loggedIn } = this.props;
-
+        
         return (
             <Router>
                 <Fragment>
@@ -28,10 +28,10 @@ class App extends Component {
                         <Nav></Nav>
                         <div>
                             <Switch>
-                                <PrivateRoute path='/' exact component={Home} loggedIn={loggedIn} />
-                                <PrivateRoute path='/leaderboard' exact component={Leaderboard} loggedIn={loggedIn} />
-                                <PrivateRoute path='/add' exact component={AddQuestion} loggedIn={loggedIn} />
-                                <PrivateRoute path='/questions/:id' exact component={Questions} loggedIn={loggedIn} />
+                                <Route path='/' exact component={Home} loggedIn={loggedIn} />
+                                <Route path='/leaderboard' exact component={Leaderboard} loggedIn={loggedIn} />
+                                <Route path='/add' exact component={AddQuestion} loggedIn={loggedIn} />
+                                <Route path='/questions/:id' exact component={Questions} loggedIn={loggedIn} />
                                 <Route path='/login' exact component={Login} />
                                 <Route component={NotFound} />
                             </Switch>
