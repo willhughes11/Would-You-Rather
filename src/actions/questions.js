@@ -28,14 +28,14 @@ function addQuestion(question) {
   };
 }
 
-// export function handleSaveQuestion(optionOneText, optionTwoText, author) {
-//   return dispatch => {
-//     return saveQuestion({ optionOneText, optionTwoText, author }).then(
-//       question => {
-//         console.log(question)
-//         dispatch(addQuestion(question));
-//         dispatch(saveQuestionAnswer(question));
-//       }
-//     );
-//   };
-// }
+export function handleSaveQuestion(optionOneText, optionTwoText, author) {
+  return dispatch => {
+    return saveQuestion({ optionOneText, optionTwoText, author }).then(
+      question => {
+        console.log(question)
+        dispatch(addQuestion(question));
+        dispatch(addAnswerToQuestion(question));
+      }
+    );
+  };
+}
