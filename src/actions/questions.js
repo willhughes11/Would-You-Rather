@@ -1,11 +1,8 @@
-import { saveQuestion, saveQuestionAnswer } from '../utils/api'
+import { saveQuestion } from '../utils/api'
 import { receiveUsers } from './users'
-
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
-export const ANSWER_QUESTION = 'ANSWER_QUESTION';
-
 
 export function receiveQuestions(questions) {
     return {
@@ -34,15 +31,3 @@ export function handleAddQuestion(text1, text2) {
         })
     }
 }
-
-// export function handleSaveQuestion(optionOneText, optionTwoText, author) {
-//   return dispatch => {
-//     return saveQuestion({ optionOneText, optionTwoText, author }).then(
-//       question => {
-//         console.log(question)
-//         dispatch(addQuestion(question));
-//         dispatch(saveQuestionAnswer(question));
-//       }
-//     );
-//   };
-// }

@@ -47,6 +47,10 @@ a {
   text-align: center;
 }
 
+.active {
+  font-weight: bold;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;

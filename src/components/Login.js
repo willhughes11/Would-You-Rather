@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { handleSetAuthUser } from '../actions/authUser'
-import { Redirect } from 'react-router-dom'
 import { loginMapStateToProps } from './MapStateToProps'
 
 class Login extends Component {
@@ -25,20 +24,14 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.dispatch(handleSetAuthUser(this.state.value))
-        this.setState(() => ({
-            home: true
-        }))
-        
+        console.log(this.props.history)
+        console.log(this.props.location)
         localStorage.setItem('authUser', this.state.value);
+        this.props.history.goBack();
     }
 
     render() {
         const { users } = this.props
-        const { home } = this.state
-
-        if (home) {
-            return <Redirect to='/' />
-        } else {
             return (
                 <div className='login-container'>
                     <div className='login'>
@@ -59,6 +52,5 @@ class Login extends Component {
             )
         }
     }
-}
 
 export default withRouter(connect(loginMapStateToProps)(Login))

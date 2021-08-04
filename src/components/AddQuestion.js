@@ -36,7 +36,7 @@ class AddQuestion extends Component {
         this.setState(() => ({
             textOne: '',
             textTwo: '',
-            home: true,
+            home: true
         }))
     }
 
@@ -53,13 +53,16 @@ class AddQuestion extends Component {
                         <TextBox 
                             placeholder="This?" 
                             value={textOne} 
-                            onChange={this.handleTextOneChange}>
+                            onChange={this.handleTextOneChange} 
+                            className="input" 
+                            maxLength={280}>
                         </TextBox>
                         <div className="center margin">OR</div>
                         <TextBox 
                             placeholder="That?" 
                             value={textTwo} 
-                            onChange={this.handleTextTwoChange}>
+                            onChange={this.handleTextTwoChange} 
+                            className="input" maxLength={280}>
                         </TextBox>
                         <button
                             className='btn'
@@ -74,13 +77,13 @@ class AddQuestion extends Component {
     }
 }
 
-const TextBox = ({placeholder,value,onChange}) =>(
+const TextBox = ({placeholder,value,onChange,className,maxLength}) =>(
         <input
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="input"
-        maxLength={280}
+        className={className}
+        maxLength={maxLength}
         >
         </input>
     )

@@ -43,7 +43,7 @@ class Nav extends Component {
                         </li>
                         {this.props.loggedIn &&
                         <li>
-                            <a style={{cursor:'pointer'}} onClick={this.logout}>
+                            <a href='# ' style={{cursor:'pointer'}} onClick={this.logout}>
                                 LOGOUT
                             </a>
                         </li>

@@ -1,14 +1,13 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { handleInitialData } from './actions/shared'
-import Home from './components/Home'
-import AddQuestion from './components/AddQuestion'
-import Leaderboard from './components/Leaderboard'
-import Questions from './components/Questions'
-import Login from './components/Login'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Nav from './components/Nav'
-import PrivateRoute from './components/PrivateRoute'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { handleInitialData } from './actions/shared';
+import Home from './components/Home';
+import AddQuestion from './components/AddQuestion';
+import Leaderboard from './components/Leaderboard';
+import Questions from './components/Questions';
+import Login from './components/Login';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import Nav from './components/Nav';
 import NotFound from './components/NotFound';
 
 
@@ -19,7 +18,7 @@ class App extends Component {
     }
 
     render() {
-        const { loggedIn } = this.props;
+        // const { loggedIn } = this.props;
 
         return (
             <Router>
@@ -28,11 +27,11 @@ class App extends Component {
                         <Nav></Nav>
                         <div>
                             <Switch>
-                                <PrivateRoute path='/' exact component={Home} loggedIn={loggedIn} />
-                                <PrivateRoute path='/leaderboard' exact component={Leaderboard} loggedIn={loggedIn} />
-                                <PrivateRoute path='/add' exact component={AddQuestion} loggedIn={loggedIn} />
-                                <PrivateRoute path='/question/:id' exact component={Questions} loggedIn={loggedIn} />
                                 <Route path='/login' exact component={Login} />
+                                <PrivateRoute path='/' exact component={Home} />
+                                <PrivateRoute path='/leaderboard' exact component={Leaderboard} />
+                                <PrivateRoute path='/add' exact component={AddQuestion} />
+                                <PrivateRoute path='/question/:id' exact component={Questions} />
                                 <Route component={NotFound} />
                             </Switch>
                         </div>
@@ -43,9 +42,25 @@ class App extends Component {
     }
 }
 
+
+const PrivateRoute = connect(mapStateToProps)(
+  ({ component: Component, authUser, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        authUser !== null ? (
+          <Component {...props} />
+        ) : (
+          <Redirect push to="/login" />
+        )
+      }
+    />
+  )
+);
+
 function mapStateToProps({authUser}) {
     return {
-        loggedIn: authUser !== null
+        authUser
     }
 }
 
